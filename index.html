@@ -10,7 +10,7 @@
     <meta name="copyright" content="Trần Đình Tuấn">
     <meta name="description" content="ArtPin - Nền tảng chia sẻ và lưu trữ nghệ thuật được sáng lập bởi Trần Đình Tuấn">
     
-    <!-- Google Fonts (Plus Jakarta Sans) & FontAwesome Icons -->
+    <!-- Google Fonts & FontAwesome Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -44,7 +44,7 @@
             background-attachment: fixed;
         }
 
-        /* NAVBAR HEADER */
+        /* HEADER */
         header {
             position: sticky;
             top: 0;
@@ -91,9 +91,7 @@
             font-weight: 500;
         }
 
-        .creator-badge strong {
-            color: #fff;
-        }
+        .creator-badge strong { color: #fff; }
 
         .nav-links {
             display: flex;
@@ -109,10 +107,7 @@
             transition: all 0.3s ease;
         }
 
-        .nav-links a:hover {
-            color: #fff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-        }
+        .nav-links a:hover { color: #fff; }
 
         /* HERO BANNER */
         .hero {
@@ -160,7 +155,7 @@
             gap: 10px;
         }
 
-        /* CARD GRID SYSTEM */
+        /* GRID SYSTEM */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -176,6 +171,7 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             flex-direction: column;
+            position: relative;
         }
 
         .card:hover {
@@ -196,28 +192,12 @@
             width: 100%;
             height: 320px;
             object-fit: cover;
-            object-position: top center; /* Giúp căn chỉnh góc mặt thẳng đẹp cho ảnh chân dung */
+            object-position: top center;
             display: block;
             transition: transform 0.5s ease;
         }
 
-        .card:hover .media-wrapper img {
-            transform: scale(1.04);
-        }
-
-        /* VIDEO CONTAINER */
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-        }
-
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            border: 0;
-        }
+        .card:hover .media-wrapper img { transform: scale(1.04); }
 
         /* CARD CONTENT */
         .card-body {
@@ -227,11 +207,47 @@
             flex-direction: column;
         }
 
+        .card-header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
         .card-title {
             font-size: 1.25rem;
             font-weight: 700;
-            margin-bottom: 8px;
             color: var(--text-main);
+        }
+
+        /* NÚT COPY LINK */
+        .btn-copy-link {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .btn-copy-link:hover {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+
+        .btn-copy-link.copied {
+            background: #22c55e !important;
+            color: #fff !important;
+            border-color: #22c55e !important;
         }
 
         .card-desc {
@@ -241,7 +257,6 @@
             flex: 1;
         }
 
-        /* THÔNG TIN NGUỒN TÁC GIẢ BÀI ĐĂNG */
         .card-footer-source {
             border-top: 1px solid var(--border-color);
             padding-top: 15px;
@@ -269,20 +284,6 @@
             justify-content: center;
             font-size: 0.75rem;
             color: #fff;
-        }
-
-        .source-link {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            transition: 0.2s;
-        }
-
-        .source-link:hover {
-            color: #ec4899;
         }
 
         /* FOOTER */
@@ -330,7 +331,6 @@
 
         <ul class="nav-links">
             <li><a href="#tac-pham">Tranh & Bức Ảnh</a></li>
-            <li><a href="#video">Video</a></li>
         </ul>
     </header>
 
@@ -343,21 +343,26 @@
     <!-- MAIN CONTENT -->
     <div class="container">
 
-        <!-- MỤC 1: TRANH & BỨC ẢNH -->
         <div class="section-header" id="tac-pham">
             <h2 class="section-title"><i class="fa-solid fa-palette" style="color: #6366f1;"></i> Bộ Sưu Tầm Tranh & Bức Ảnh</h2>
         </div>
 
         <div class="grid">
 
-            <!-- BÀI ĐĂNG 1: ẢNH CHÂN DÙNG THỰC TẾ BẠN ĐÃ THÊM -->
-            <div class="card">
+            <!-- BÀI ĐĂNG 1 (CÓ ID ĐỂ ĐỊNH DANH LINK: post-1) -->
+            <div class="card" id="post-1">
                 <div class="media-wrapper">
-                    <!-- Link ảnh chân dung nằm trong thư mục images -->
                     <img src="image.jpg" alt="Chân dung công sở">
                 </div>
                 <div class="card-body">
-                    <h3 class="card-title">Chân Dung Công Sở Professional</h3>
+                    <div class="card-header-flex">
+                        <h3 class="card-title">Chân Dung Công Sở Professional</h3>
+                        <!-- NÚT SAO CHÉP LINK BÀI VIẾT -->
+                        <button class="btn-copy-link" onclick="copyPostLink('post-1', this)">
+                            <i class="fa-regular fa-copy"></i> Copy Link
+                        </button>
+                    </div>
+                    
                     <p class="card-desc">Ảnh chụp chân dung phong cách làm việc chuyên nghiệp, thanh lịch với phông nền xanh tiêu chuẩn.</p>
                     
                     <div class="card-footer-source">
@@ -372,13 +377,19 @@
                 </div>
             </div>
 
-            <!-- BÀI ĐĂNG 2: TÁC PHẨM TRỪU TƯỢNG (ẢNH NGUỒN TÁC GIẢ KHÁC MẪU) -->
-            <div class="card">
+            <!-- BÀI ĐĂNG 2 (ID: post-2) -->
+            <div class="card" id="post-2">
                 <div class="media-wrapper">
                     <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=600&q=80" alt="Tác phẩm nghệ thuật">
                 </div>
                 <div class="card-body">
-                    <h3 class="card-title">Vũ Điệu Màu Sắc Trừu Tượng</h3>
+                    <div class="card-header-flex">
+                        <h3 class="card-title">Vũ Điệu Màu Sắc Trừu Tượng</h3>
+                        <button class="btn-copy-link" onclick="copyPostLink('post-2', this)">
+                            <i class="fa-regular fa-copy"></i> Copy Link
+                        </button>
+                    </div>
+                    
                     <p class="card-desc">Bức tranh nghệ thuật sơn dầu kết hợp kỹ thuật phối màu đương đại cực kỳ ấn tượng.</p>
                     
                     <div class="card-footer-source">
@@ -386,34 +397,7 @@
                             <div class="author-avatar"><i class="fa-solid fa-user"></i></div>
                             <span>Tác giả: <strong>Elena Rostova</strong></span>
                         </div>
-                        <a href="https://unsplash.com" target="_blank" class="source-link">Nguồn gốc <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- MỤC 2: VIDEO NỔI BẬT -->
-        <div class="section-header" id="video" style="margin-top: 60px;">
-            <h2 class="section-title"><i class="fa-solid fa-film" style="color: #ec4899;"></i> Video Chia Sẻ</h2>
-        </div>
-
-        <div class="grid">
-
-            <div class="card">
-                <div class="media-wrapper video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video" allowfullscreen></iframe>
-                </div>
-                <div class="card-body">
-                    <h3 class="card-title">Hướng Dẫn Sáng Tạo Nội Dung</h3>
-                    <p class="card-desc">Video tư liệu chia sẻ quy trình làm việc và lên ý tưởng cho các bài viết cá nhân.</p>
-                    
-                    <div class="card-footer-source">
-                        <div class="author-info">
-                            <div class="author-avatar"><i class="fa-brands fa-youtube"></i></div>
-                            <span>Kênh: <strong>Creative Studio</strong></span>
-                        </div>
-                        <a href="https://youtube.com" target="_blank" class="source-link">Xem gốc <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        <a href="https://unsplash.com" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 600;">Nguồn gốc <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                     </div>
                 </div>
             </div>
@@ -422,7 +406,7 @@
 
     </div>
 
-    <!-- FOOTER CHẮC CHẮN BẢN QUYỀN -->
+    <!-- FOOTER -->
     <footer>
         <div class="footer-brand">ArtPin</div>
         <p class="footer-copyright">
@@ -432,6 +416,29 @@
             <i class="fa-solid fa-code"></i> Developed & Designed by <strong>Trần Đình Tuấn</strong>
         </div>
     </footer>
+
+    <!-- JAVASCRIPT XỬ LÝ TÍNH NĂNG SAO CHÉP LINK BÀI VIẾT -->
+    <script>
+        function copyPostLink(postId, buttonElement) {
+            // Lấy URL hiện tại của trang web và gắn thêm anchor #postId của bài viết đó
+            const postUrl = window.location.origin + window.location.pathname + '#' + postId;
+            
+            // Thực hiện Copy vào Clipboard của người dùng
+            navigator.clipboard.writeText(postUrl).then(() => {
+                // Đổi giao diện nút bấm thành "Đã chép!"
+                buttonElement.classList.add('copied');
+                buttonElement.innerHTML = '<i class="fa-solid fa-check"></i> Đã chép!';
+                
+                // Sau 2 giây tự chuyển lại nút ban đầu
+                setTimeout(() => {
+                    buttonElement.classList.remove('copied');
+                    buttonElement.innerHTML = '<i class="fa-regular fa-copy"></i> Copy Link';
+                }, 2000);
+            }).catch(err => {
+                console.error('Lỗi khi sao chép link: ', err);
+            });
+        }
+    </script>
 
 </body>
 </html>
