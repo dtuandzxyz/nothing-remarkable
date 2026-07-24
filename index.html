@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HaKai Art Agency | Trần Đình Tuấn - Triển Lãm & Nghệ Thuật Số</title>
+  <meta name="description" content="Website triển lãm và lưu trữ tác phẩm nghệ thuật, Visual Art, 3D Graphics & Video sáng tạo bởi Trần Đình Tuấn - HaKai Art Agency.">
+  <meta name="keywords" content="HaKai Art Agency, Trần Đình Tuấn, Art Portfolio, Visual Art, Digital Art, 3D Art, Video Art">
+  <meta name="author" content="Trần Đình Tuấn">
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="HaKai Art Agency | Trần Đình Tuấn">
+  <meta property="og:description" content="Triển lãm nghệ thuật số đẳng cấp, upload & chia sẻ tác phẩm nghệ thuật dễ dàng.">
+  <meta property="og:image" content="assets/images/artwork_1.jpg">
+  <meta property="og:type" content="website">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+  <!-- Header Navigation -->
+  <header class="header">
+    <div class="container header-content">
+      <a href="#" class="brand-logo">
+        <div class="logo-badge">HK</div>
+        <div class="brand-text">
+          <h1>HaKai Art Agency</h1>
+          <span>Owner: Trần Đình Tuấn</span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#hero" class="nav-link active">Trang Chủ</a></li>
+          <li><a href="#gallery" class="nav-link">Bộ Sưu Tập</a></li>
+          <li><a href="#about" class="nav-link">Về Tác Giả</a></li>
+          <li><a href="#services" class="nav-link">Dịch Vụ</a></li>
+          <li><a href="#contact" class="nav-link">Liên Hệ</a></li>
+        </ul>
+      </nav>
+
+      <button class="btn-upload-nav btn-open-upload">
+        <span>✦</span> Tải Lên Tác Phẩm
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero">
+    <div class="container">
+      <div class="hero-tag">
+        <span>✨</span> HaKai Art Agency • Creative Studio
+      </div>
+      <h1 class="hero-title">
+        Triển Lãm Nghệ Thuật Số Đẳng Cấp<br>
+        Bởi <span>Trần Đình Tuấn</span>
+      </h1>
+      <p class="hero-subtitle">
+        Không gian trưng bày, lưu trữ và chia sẻ các tác phẩm nghệ thuật thị giác (Visual Art), đồ họa 3D và Video độc đáo. Nơi cảm hứng sáng tạo được lan tỏa mạnh mẽ.
+      </p>
+
+      <div class="hero-actions">
+        <button class="btn-primary btn-open-upload">
+          ⚡ Tải Lên Tác Phẩm Ngay
+        </button>
+        <a href="#gallery" class="btn-secondary">
+          🎨 Khám Phá Gallery
+        </a>
+      </div>
+
+      <!-- Stats Bar -->
+      <div class="hero-stats">
+        <div class="stat-item">
+          <h3 id="statTotalArtworks">3</h3>
+          <p>Tác Phẩm Trưng Bày</p>
+        </div>
+        <div class="stat-item">
+          <h3>Trần Đình Tuấn</h3>
+          <p>Chủ Sở Hữu / Founder</p>
+        </div>
+        <div class="stat-item">
+          <h3>4K / 8K</h3>
+          <p>Chất Lượng Tác Phẩm</p>
+        </div>
+        <div class="stat-item">
+          <h3>100%</h3>
+          <p>Bản Quyền Độc Quyền</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section id="gallery" style="padding: 4rem 0;">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Bộ Sưu Tập Tác Phẩm</h2>
+          <p class="section-subtitle">Truy cập và xem chi tiết từng tác phẩm nghệ thuật dễ dàng</p>
+        </div>
+      </div>
+
+      <!-- Toolbar (Filters & Search) -->
+      <div class="gallery-toolbar">
+        <div class="filter-group">
+          <button class="filter-btn active" data-filter="all">Tất Cả</button>
+          <button class="filter-btn" data-filter="visual-art">Visual Art</button>
+          <button class="filter-btn" data-filter="digital-art">Digital Art</button>
+          <button class="filter-btn" data-filter="3d-art">3D Art</button>
+          <button class="filter-btn" data-filter="video">Video & Animation</button>
+        </div>
+
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" class="search-input" placeholder="Tìm kiếm tác phẩm, thẻ (tag)...">
+        </div>
+      </div>
+
+      <!-- Gallery Grid -->
+      <div id="galleryGrid" class="gallery-grid">
+        <!-- Rendered dynamically by js/app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" style="padding: 5rem 0; background: rgba(13, 18, 29, 0.4); border-top: 1px solid var(--border-light);">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; align-items: center;">
+        <div>
+          <div class="hero-tag">HA KAI FOUNDER</div>
+          <h2 style="font-size: 2.4rem; margin-bottom: 1.2rem;">Chủ Sở Hữu: <span style="color: var(--accent-gold);">Trần Đình Tuấn</span></h2>
+          <p style="color: var(--text-muted); margin-bottom: 1rem; line-height: 1.8;">
+            **HaKai Art Agency** được sáng lập bởi **Trần Đình Tuấn** với định hướng tôn vinh cái đẹp và sức mạnh sáng tạo nghệ thuật không giới hạn. Chúng tôi tự hào mang đến những trải nghiệm thị giác ấn tượng nhất từ Digital Drawing, 3D Rendering cho đến các sản phẩm Motion Graphics cao cấp.
+          </p>
+          <p style="color: var(--text-muted); line-height: 1.8;">
+            Website này là nơi triển lãm trực tiếp các sản phẩm nghệ thuật độc quyền, cho phép mọi người tiếp cận, chiêm ngưỡng và liên hệ hợp tác một cách nhanh chóng nhất.
+          </p>
+        </div>
+
+        <div style="background: var(--bg-card); border: 1px solid var(--border-light); padding: 2rem; border-radius: var(--radius-lg); box-shadow: 0 15px 35px rgba(0,0,0,0.5);">
+          <h3 style="color: var(--accent-gold); margin-bottom: 1rem; font-size: 1.4rem;">🎯 Sứ Mệnh HaKai Art Agency</h3>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; color: var(--text-muted);">
+            <li>✓ **Sáng tạo độc bản**: Mỗi tác phẩm là một câu chuyện riêng biệt.</li>
+            <li>✓ **Đa dạng chất liệu**: Từ ảnh tĩnh độ phân giải cao đến video chuyển động.</li>
+            <li>✓ **Dễ dàng tiếp cận**: Trải nghiệm xem mượt mà trên mọi thiết bị di động & máy tính.</li>
+            <li>✓ **Sẵn sàng chia sẻ**: Kết nối nghệ thuật với cộng đồng đam mê.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" style="padding: 5rem 0;">
+    <div class="container">
+      <div class="section-header" style="text-align: center; display: block; margin-bottom: 3rem;">
+        <h2 class="section-title" style="margin: 0 auto 10px auto;">Dịch Vụ Cung Cấp</h2>
+        <p class="section-subtitle">Những lĩnh vực sáng tạo hàng đầu tại HaKai Art Agency</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem;">
+        <div style="background: var(--bg-card); border: 1px solid var(--border-light); padding: 2rem; border-radius: var(--radius-md);">
+          <div style="font-size: 2.5rem; color: var(--accent-gold); margin-bottom: 1rem;">🖼️</div>
+          <h3 style="margin-bottom: 0.5rem; font-size: 1.2rem;">Visual Art & Concept</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Thiết kế hình ảnh concept art, minh họa nhân vật và sáng tạo phong cách thị giác độc đáo.</p>
+        </div>
+
+        <div style="background: var(--bg-card); border: 1px solid var(--border-light); padding: 2rem; border-radius: var(--radius-md);">
+          <div style="font-size: 2.5rem; color: var(--accent-crimson); margin-bottom: 1rem;">💎</div>
+          <h3 style="margin-bottom: 0.5rem; font-size: 1.2rem;">3D Design & Modeling</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Dựng hình 3D, phối cảnh không gian siêu thực và kết cấu chất liệu tinh xảo.</p>
+        </div>
+
+        <div style="background: var(--bg-card); border: 1px solid var(--border-light); padding: 2rem; border-radius: var(--radius-md);">
+          <div style="font-size: 2.5rem; color: var(--accent-purple); margin-bottom: 1rem;">🎬</div>
+          <h3 style="margin-bottom: 0.5rem; font-size: 1.2rem;">Video & Motion Art</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Sản xuất video nghệ thuật, hiệu ứng kỹ xảo chuyển động và intro thương hiệu.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" style="padding: 5rem 0; background: rgba(13, 18, 29, 0.4); border-top: 1px solid var(--border-light);">
+    <div class="container" style="max-width: 700px; text-align: center;">
+      <h2 class="section-title" style="margin: 0 auto 10px auto;">Liên Hệ Hợp Tác</h2>
+      <p class="section-subtitle" style="margin-bottom: 2rem;">Gửi thông điệp trực tiếp cho Trần Đình Tuấn - HaKai Art Agency</p>
+
+      <form onsubmit="event.preventDefault(); alert('Cảm ơn bạn đã gửi liên hệ! Trần Đình Tuấn sẽ phản hồi sớm nhất.');" style="display: flex; flex-direction: column; gap: 1.2rem; text-align: left;">
+        <div>
+          <label class="form-label">Họ và Tên</label>
+          <input type="text" class="form-input" placeholder="Nhập tên của bạn..." required>
+        </div>
+        <div>
+          <label class="form-label">Email Liên Hệ</label>
+          <input type="email" class="form-input" placeholder="name@example.com" required>
+        </div>
+        <div>
+          <label class="form-label">Nội Dung Thảo Luận</label>
+          <textarea class="form-textarea" rows="4" placeholder="Nêu ý tưởng hoặc yêu cầu hợp tác của bạn..." required></textarea>
+        </div>
+        <button type="submit" class="btn-primary" style="margin-top: 0.5rem; width: 100%;">🚀 Gửi Thông Điệp</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="brand-logo">
+          <div class="logo-badge">HK</div>
+          <div class="brand-text">
+            <h1>HaKai Art Agency</h1>
+            <span>Chủ sở hữu: Trần Đình Tuấn</span>
+          </div>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Trải nghiệm nghệ thuật số đỉnh cao trên GitHub Pages.</p>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 HaKai Art Agency. Owned & Designed by <strong>Trần Đình Tuấn</strong>. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= MODALS ================= -->
+
+  <!-- Detail Artwork Modal -->
+  <div id="detailModal" class="modal-overlay">
+    <div class="modal-content">
+      <button id="closeDetailBtn" class="modal-close-btn">&times;</button>
+      <div class="detail-modal-grid">
+        <!-- Left: Media Display Container -->
+        <div id="detailMediaContainer" class="detail-media-container">
+          <!-- Dynamically inserted (img or video) -->
+        </div>
+
+        <!-- Right: Information Panel -->
+        <div class="detail-info-panel">
+          <div>
+            <span id="detailCategory" class="artwork-category">Category</span>
+            <h2 id="detailTitle" style="font-size: 1.8rem; margin: 6px 0 12px 0;">Title</h2>
+            <div class="artwork-author" style="border: none; padding: 0;">
+              <div class="author-avatar">T</div>
+              <span id="detailAuthor" style="color: var(--text-main); font-weight: 600;">Trần Đình Tuấn</span>
+            </div>
+          </div>
+
+          <p id="detailDesc" style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
+            Mô tả tác phẩm...
+          </p>
+
+          <div id="detailTags" class="detail-tags">
+            <!-- Dynamic Tags -->
+          </div>
+
+          <div class="detail-meta-list">
+            <div><strong>Ngày phát hành:</strong> <span id="detailDate">2026-07-24</span></div>
+            <div><strong>Đơn vị sở hữu:</strong> HaKai Art Agency</div>
+          </div>
+
+          <div class="detail-actions">
+            <button id="btnShareArtwork" class="btn-secondary" style="padding: 0.6rem 1.2rem; font-size: 0.85rem;">🔗 Chia Sẻ</button>
+            <button id="btnDownloadArtwork" class="btn-primary" style="padding: 0.6rem 1.2rem; font-size: 0.85rem;">⬇️ Tải Về</button>
+            <button id="btnDeleteArtwork" class="btn-secondary" style="padding: 0.6rem 1.2rem; font-size: 0.85rem; border-color: var(--accent-crimson); color: var(--accent-crimson); display: none;">🗑️ Xóa</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Upload Artwork Modal -->
+  <div id="uploadModal" class="modal-overlay">
+    <div class="modal-content upload-modal-content">
+      <button id="closeUploadBtn" class="modal-close-btn">&times;</button>
+      
+      <div class="upload-header">
+        <h2>✦ Đăng Tác Phẩm Mới</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">Tải lên hình ảnh hoặc video nghệ thuật vào bộ sưu tập</p>
+      </div>
+
+      <form id="uploadForm">
+        <!-- Drag & Drop Zone -->
+        <div id="dropzone" class="dropzone">
+          <div class="dropzone-icon">📁</div>
+          <p style="font-weight: 600; margin-bottom: 4px;">Kéo & thả file Ảnh hoặc Video vào đây</p>
+          <p style="color: var(--text-muted); font-size: 0.8rem;">Hoặc bấm vào để chọn từ máy tính (PNG, JPG, MP4, WEBM)</p>
+          <input type="file" id="fileInput" accept="image/*,video/*" style="display: none;">
+
+          <img id="uploadPreview" class="preview-thumbnail" alt="Preview Image">
+          <video id="videoPreview" class="preview-thumbnail" controls style="display: none;"></video>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Tên Tác Phẩm *</label>
+          <input type="text" id="upTitle" class="form-input" placeholder="Ví dụ: Cyber Gold Fantasy..." required>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label class="form-label">Thể Loại *</label>
+            <select id="upCategory" class="form-select">
+              <option value="visual-art">Visual Art</option>
+              <option value="digital-art">Digital Art</option>
+              <option value="3d-art">3D Art</option>
+              <option value="video">Video & Animation</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Tác Giả</label>
+            <input type="text" id="upAuthor" class="form-input" value="Trần Đình Tuấn">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Mô Tả Tác Phẩm</label>
+          <textarea id="upDesc" class="form-textarea" rows="3" placeholder="Giới thiệu ý tưởng sáng tác, công cụ sử dụng..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Thẻ / Tag (Phân cách bằng dấu phẩy)</label>
+          <input type="text" id="upTags" class="form-input" placeholder="Ví dụ: Neon, 3D, Cyber, HaKai">
+        </div>
+
+        <button type="submit" class="btn-primary" style="width: 100%; margin-top: 1rem;">
+          🚀 Tải Lên & Trưng Bày Ngay
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
