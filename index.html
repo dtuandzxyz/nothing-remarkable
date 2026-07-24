@@ -1,121 +1,133 @@
-<?php
-// Đường dẫn thư mục lưu ảnh
-$uploadDir = 'uploads/';
-
-// Tạo thư mục nếu chưa tồn tại
-if (!is_dir($uploadDir)) {
-    mkdir($uploadDir, 0755, true);
-}
-
-$message = '';
-$messageType = '';
-
-// Xử lý khi người dùng submit form upload
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['photo'])) {
-    $file = $_FILES['photo'];
-
-    if ($file['error'] === UPLOAD_ERR_OK) {
-        $fileTmpPath = $file['tmp_name'];
-        $fileName = $file['name'];
-        $fileSize = $file['size'];
-        $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-
-        // Các định dạng ảnh được phép upload
-        $allowedExtensions = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
-        // Giới hạn dung lượng: 5MB
-        $maxFileSize = 5 * 1024 * 1024;
-
-        if (!in_array($fileExtension, $allowedExtensions)) {
-            $message = 'Chỉ hỗ trợ các định dạng ảnh: JPG, JPEG, PNG, WEBP, GIF.';
-            $messageType = 'error';
-        } elseif ($fileSize > $maxFileSize) {
-            $message = 'Dung lượng ảnh vượt quá giới hạn 5MB.';
-            $messageType = 'error';
-        } else {
-            // Đổi tên file ngẫu nhiên để tránh trùng lặp và lộ tên gốc
-            $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
-            $destPath = $uploadDir . $newFileName;
-
-            if (move_uploaded_file($fileTmpPath, $destPath)) {
-                $message = 'Tải ảnh lên thành công!';
-                $messageType = 'success';
-            } else {
-                $message = 'Có lỗi xảy ra khi lưu file lên server.';
-                $messageType = 'error';
-            }
-        }
-    } else {
-        $message = 'Vui lòng chọn một file ảnh hợp lệ.';
-        $messageType = 'error';
-    }
-}
-
-// Lấy danh sách ảnh đã upload trong thư mục
-$images = glob($uploadDir . '*.{jpg,jpeg,png,webp,gif}', GLOB_BRACE);
-?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản Lý & Đăng Ảnh Cá Nhân</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
-        body { background-color: #f4f6f8; color: #333; padding: 20px; }
-        .container { max-width: 900px; margin: 0 auto; }
-        h1 { text-align: center; margin-bottom: 20px; color: #2c3e50; }
-        
-        .upload-card { background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 30px; }
-        .form-group { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-        input[type="file"] { padding: 10px; border: 1px solid #ccc; border-radius: 6px; flex: 1; min-width: 200px; }
-        button { background: #0066cc; color: #fff; border: none; padding: 12px 24px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: background 0.2s; }
-        button:hover { background: #0052a3; }
-        
-        .alert { padding: 12px; border-radius: 6px; margin-bottom: 15px; }
-        .alert.success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
-        .alert.error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+    <!-- Thông tin bản quyền & SEO -->
+    <title>Trần Đình Tuấn - Personal Blog</title>
+    <meta name="author" content="Trần Đình Tuấn">
+    <meta name="copyright" content="Trần Đình Tuấn">
+    <meta name="description" content="Trang web chia sẻ bài viết và video cá nhân của Trần Đình Tuấn">
 
-        .gallery-title { margin-bottom: 15px; color: #34495e; font-size: 1.25rem; }
-        .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
-        .gallery-item { background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.05); position: relative; }
-        .gallery-item img { width: 100%; height: 180px; object-fit: cover; display: block; }
-        .watermark { position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,0.6); color: #fff; padding: 2px 6px; font-size: 11px; border-radius: 4px; }
+    <style>
+        /* CSS căn bản giúp trang web gọn gàng, hiện đại */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            background: #1a252f;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: #fff;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        .date {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            margin-bottom: 15px;
+        }
+
+        /* Tối ưu tỷ lệ khung hình video YouTube (16:9) */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* Tỷ lệ 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 6px;
+            margin-top: 15px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background: #e9ecef;
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-top: 40px;
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Bộ Sưu Tập Ảnh Cá Nhân</h1>
+    <!-- Thanh Tiêu Đề -->
+    <header>
+        <h1>Trần Đình Tuấn Blog</h1>
+        <p>Góc chia sẻ bài viết & Video cá nhân</p>
+    </header>
 
-    <div class="upload-card">
-        <?php if (!empty($message)): ?>
-            <div class="alert <?= $messageType ?>">
-                <?= htmlspecialchars($message) ?>
+    <!-- Nội dung chính -->
+    <div class="container">
+
+        <!-- Bài Viết Mẫu -->
+        <article class="card">
+            <h2>Bài viết đầu tiên: Hành trình tự làm Website</h2>
+            <div class="date">Đăng ngày: 24/07/2026 • Tác giả: <strong>Trần Đình Tuấn</strong></div>
+            <p>
+                Chào mừng bạn đến với trang web cá nhân của tôi! Đây là nơi tôi lưu trữ những bài viết, góc nhìn và các video hướng dẫn/chia sẻ. Việc tự tay dựng lên một trang web trên GitHub Pages giúp tôi hiểu rõ hơn về cấu trúc web và quản lý mã nguồn.
+            </p>
+        </article>
+
+        <!-- Video Mẫu Nhúng Từ YouTube -->
+        <article class="card">
+            <h2>Video nổi bật</h2>
+            <p>Dưới đây là video mẫu được nhúng trực tiếp từ YouTube mà không tốn dung lượng lưu trữ trên GitHub:</p>
+            
+            <div class="video-container">
+                <!-- Thay ID video 'dQw4w9WgXcQ' bằng ID video YouTube của bạn -->
+                <iframe 
+                    src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                    title="YouTube video player" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
             </div>
-        <?php endif; ?>
+        </article>
 
-        <form action="" method="POST" enctype="multipart/form-data" class="form-group">
-            <input type="file" name="photo" accept="image/*" required>
-            <button type="submit">Tải Ảnh Lên</button>
-        </form>
     </div>
 
-    <h2 class="gallery-title">Tất cả ảnh đã tải lên (<?= count($images) ?>)</h2>
-    <div class="gallery">
-        <?php if (!empty($images)): ?>
-            <?php foreach ($images as $img): ?>
-                <div class="gallery-item">
-                    <a href="<?= htmlspecialchars($img) ?>" target="_blank">
-                        <img src="<?= htmlspecialchars($img) ?>" alt="Ảnh cá nhân" loading="lazy">
-                    </a>
-                    <span class="watermark">Bản quyền ©</span>
-                </div>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <p style="color: #777;">Chưa có ảnh nào được tải lên.</p>
-        <?php endif; ?>
-    </div>
-</div>
+    <!-- Chân Trang - Xác Nhận Bản Quyền -->
+    <footer>
+        <p>&copy; 2026 <strong>Trần Đình Tuấn</strong>. All rights reserved.</p>
+    </footer>
 
 </body>
 </html>
