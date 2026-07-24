@@ -3,23 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trần Đình Tuấn - Personal Portfolio & Blog</title>
-    <!-- SEO & Author -->
+    <title>ArtPin - Platform sáng tạo độc lập</title>
+    
+    <!-- Meta & SEO -->
     <meta name="author" content="Trần Đình Tuấn">
     <meta name="copyright" content="Trần Đình Tuấn">
+    <meta name="description" content="ArtPin - Nền tảng chia sẻ và lưu trữ nghệ thuật được sáng lập bởi Trần Đình Tuấn">
     
-    <!-- Google Fonts & FontAwesome Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts (Plus Jakarta Sans) & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
-            --primary-color: #2563eb;
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --bg-dark: #090d16;
+            --card-bg: rgba(22, 30, 46, 0.75);
+            --border-color: rgba(255, 255, 255, 0.08);
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --accent-border: #334155;
+            --accent-glow: rgba(99, 102, 241, 0.15);
         }
 
         * {
@@ -29,261 +33,388 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-dark);
             color: var(--text-main);
             line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 20% 15%, var(--accent-glow) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(236, 72, 153, 0.1) 0%, transparent 40%);
+            background-attachment: fixed;
         }
 
-        /* Navigation Bar */
-        navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.2rem 8%;
-            background: rgba(15, 23, 42, 0.9);
-            backdrop-filter: blur(10px);
+        /* NAVBAR HEADER */
+        header {
             position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 1px solid var(--accent-border);
+            background: rgba(9, 13, 22, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
         .logo {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--text-main);
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #fff;
             text-decoration: none;
+            letter-spacing: -0.5px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
-        .logo i { color: var(--primary-color); }
+        .logo i {
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .creator-badge {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .creator-badge strong {
+            color: #fff;
+        }
 
         .nav-links {
             display: flex;
-            gap: 20px;
+            gap: 30px;
             list-style: none;
         }
 
         .nav-links a {
             color: var(--text-muted);
             text-decoration: none;
-            font-weight: 500;
-            transition: 0.3s;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
         }
 
-        .nav-links a:hover { color: var(--primary-color); }
+        .nav-links a:hover {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
 
-        /* Container & Grid Layout */
+        /* HERO BANNER */
+        .hero {
+            text-align: center;
+            padding: 60px 20px 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: linear-gradient(180deg, #ffffff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        /* MAIN CONTAINER */
         .container {
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 0 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
         }
 
         .section-title {
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            border-left: 4px solid var(--primary-color);
-            padding-left: 12px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
+        /* CARD GRID SYSTEM */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
-            margin-bottom: 50px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
         }
 
-        /* Card Component */
         .card {
             background: var(--card-bg);
-            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
             overflow: hidden;
-            border: 1px solid var(--accent-border);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             flex-direction: column;
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+            transform: translateY(-8px);
+            border-color: rgba(99, 102, 241, 0.4);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.5), 0 0 20px var(--accent-glow);
         }
 
-        /* MEDIA CONTAINER & WATERMARK (Tự đóng dấu chủ sở hữu) */
-        .media-box {
+        /* MEDIA DISPLAY */
+        .media-wrapper {
             position: relative;
             width: 100%;
             background: #000;
             overflow: hidden;
         }
 
-        .media-box img {
+        .media-wrapper img {
             width: 100%;
-            height: 220px;
+            height: 320px;
             object-fit: cover;
+            object-position: top center; /* Giúp căn chỉnh góc mặt thẳng đẹp cho ảnh chân dung */
             display: block;
+            transition: transform 0.5s ease;
         }
 
-        /* Đóng dấu watermark người đăng trên ảnh/video */
-        .watermark {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            background: rgba(15, 23, 42, 0.85);
-            color: #fff;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(4px);
-            pointer-events: none;
-            display: flex;
-            align-items: center;
-            gap: 5px;
+        .card:hover .media-wrapper img {
+            transform: scale(1.04);
         }
 
-        .watermark i {
-            color: #22c55e; /* Icon tích xanh chứng nhận */
-        }
-
-        /* Video Responsive Box */
-        .video-box {
+        /* VIDEO CONTAINER */
+        .video-wrapper {
             position: relative;
             padding-bottom: 56.25%;
             height: 0;
         }
 
-        .video-box iframe {
+        .video-wrapper iframe {
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
             border: 0;
         }
 
-        /* Card Content */
+        /* CARD CONTENT */
         .card-body {
-            padding: 20px;
+            padding: 22px;
             flex: 1;
             display: flex;
             flex-direction: column;
         }
 
         .card-title {
-            font-size: 1.2rem;
-            font-weight: 600;
+            font-size: 1.25rem;
+            font-weight: 700;
             margin-bottom: 8px;
             color: var(--text-main);
         }
 
-        .card-meta {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-bottom: 12px;
-            display: flex;
-            gap: 15px;
-        }
-
         .card-desc {
-            color: #cbd5e1;
-            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            margin-bottom: 20px;
             flex: 1;
         }
 
-        /* Footer */
+        /* THÔNG TIN NGUỒN TÁC GIẢ BÀI ĐĂNG */
+        .card-footer-source {
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.85rem;
+        }
+
+        .author-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #e2e8f0;
+            font-weight: 600;
+        }
+
+        .author-avatar {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: #fff;
+        }
+
+        .source-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: 0.2s;
+        }
+
+        .source-link:hover {
+            color: #ec4899;
+        }
+
+        /* FOOTER */
         footer {
+            background: #05070c;
+            border-top: 1px solid var(--border-color);
+            padding: 40px 20px;
             text-align: center;
-            padding: 30px;
-            background: #090d16;
-            border-top: 1px solid var(--accent-border);
+        }
+
+        .footer-brand {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .footer-copyright {
             color: var(--text-muted);
             font-size: 0.9rem;
         }
 
-        footer strong { color: var(--text-main); }
+        .founder-tag {
+            display: inline-block;
+            margin-top: 15px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(236, 72, 153, 0.2));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: #cbd5e1;
+        }
     </style>
 </head>
 <body>
 
-    <!-- Thanh Điều Hướng Header -->
-    <navbar>
-        <a href="#" class="logo">
-            <i class="fa-solid fa-shield-halved"></i> Trần Đình Tuấn
-        </a>
+    <!-- NAVBAR HEADER -->
+    <header>
+        <div class="brand-container">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-shapes"></i> ArtPin
+            </a>
+            <div class="creator-badge">Created by <strong>Trần Đình Tuấn</strong></div>
+        </div>
+
         <ul class="nav-links">
-            <li><a href="#bai-viet">Bài viết</a></li>
-            <li><a href="#tranh-anh">Tranh / Ảnh</a></li>
+            <li><a href="#tac-pham">Tranh & Bức Ảnh</a></li>
             <li><a href="#video">Video</a></li>
         </ul>
-    </navbar>
+    </header>
 
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <h1>Khám Phá Sáng Tạo Trên ArtPin</h1>
+        <p>Nền tảng lưu trữ, tổng hợp bài viết và các tác phẩm nghệ thuật độc đáo.</p>
+    </section>
+
+    <!-- MAIN CONTENT -->
     <div class="container">
 
-        <!-- MỤC 1: TRANH / BỨC ẢNH CÓ ĐÓNG DẤU TÊN -->
-        <h2 class="section-title" id="tranh-anh">Bộ Sưu Tầm Tranh & Ảnh</h2>
+        <!-- MỤC 1: TRANH & BỨC ẢNH -->
+        <div class="section-header" id="tac-pham">
+            <h2 class="section-title"><i class="fa-solid fa-palette" style="color: #6366f1;"></i> Bộ Sưu Tầm Tranh & Bức Ảnh</h2>
+        </div>
+
         <div class="grid">
-            
-            <!-- Ảnh 1 -->
+
+            <!-- BÀI ĐĂNG 1: ẢNH CHÂN DÙNG THỰC TẾ BẠN ĐÃ THÊM -->
             <div class="card">
-                <div class="media-box">
-                    <!-- Thay link ảnh của bạn vào src bên dưới -->
-                    <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=600&q=80" alt="Bức tranh nghệ thuật">
-                    <!-- Nhãn đóng dấu bản quyền -->
-                    <div class="watermark">
-                        <i class="fa-solid fa-circle-check"></i> By Trần Đình Tuấn
-                    </div>
+                <div class="media-wrapper">
+                    <!-- Link ảnh chân dung nằm trong thư mục images -->
+                    <img src="images/chan-dung.jpg" alt="Chân dung công sở">
                 </div>
                 <div class="card-body">
-                    <h3 class="card-title">Tác phẩm Tranh Số 01</h3>
-                    <div class="card-meta">
-                        <span><i class="fa-regular fa-calendar"></i> 24/07/2026</span>
+                    <h3 class="card-title">Chân Dung Công Sở Professional</h3>
+                    <p class="card-desc">Ảnh chụp chân dung phong cách làm việc chuyên nghiệp, thanh lịch với phông nền xanh tiêu chuẩn.</p>
+                    
+                    <div class="card-footer-source">
+                        <div class="author-info">
+                            <div class="author-avatar" style="background: #ec4899;"><i class="fa-solid fa-crown"></i></div>
+                            <span>Tác giả: <strong>Trần Đình Tuấn</strong></span>
+                        </div>
+                        <span style="color: #22c55e; font-weight: 600; font-size: 0.8rem;">
+                            <i class="fa-solid fa-circle-check"></i> Chính chủ
+                        </span>
                     </div>
-                    <p class="card-desc">Bức tranh thiết kế đồ họa phong cách hiện đại được sáng tác và đăng tải bởi Trần Đình Tuấn.</p>
                 </div>
             </div>
 
-            <!-- Ảnh 2 -->
+            <!-- BÀI ĐĂNG 2: TÁC PHẨM TRỪU TƯỢNG (ẢNH NGUỒN TÁC GIẢ KHÁC MẪU) -->
             <div class="card">
-                <div class="media-box">
-                    <img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=600&q=80" alt="Bức tranh 2">
-                    <div class="watermark">
-                        <i class="fa-solid fa-circle-check"></i> By Trần Đình Tuấn
-                    </div>
+                <div class="media-wrapper">
+                    <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=600&q=80" alt="Tác phẩm nghệ thuật">
                 </div>
                 <div class="card-body">
-                    <h3 class="card-title">Ý tưởng Phối màu Nghệ thuật</h3>
-                    <div class="card-meta">
-                        <span><i class="fa-regular fa-calendar"></i> 22/07/2026</span>
+                    <h3 class="card-title">Vũ Điệu Màu Sắc Trừu Tượng</h3>
+                    <p class="card-desc">Bức tranh nghệ thuật sơn dầu kết hợp kỹ thuật phối màu đương đại cực kỳ ấn tượng.</p>
+                    
+                    <div class="card-footer-source">
+                        <div class="author-info">
+                            <div class="author-avatar"><i class="fa-solid fa-user"></i></div>
+                            <span>Tác giả: <strong>Elena Rostova</strong></span>
+                        </div>
+                        <a href="https://unsplash.com" target="_blank" class="source-link">Nguồn gốc <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                     </div>
-                    <p class="card-desc">Một góc nhìn sáng tạo về màu sắc và ánh sáng trong thiết kế.</p>
                 </div>
             </div>
 
         </div>
 
+        <!-- MỤC 2: VIDEO NỔI BẬT -->
+        <div class="section-header" id="video" style="margin-top: 60px;">
+            <h2 class="section-title"><i class="fa-solid fa-film" style="color: #ec4899;"></i> Video Chia Sẻ</h2>
+        </div>
 
-        <!-- MỤC 2: VIDEO CÓ ĐÓNG DẤU TÊN -->
-        <h2 class="section-title" id="video">Video Chia Sẻ</h2>
         <div class="grid">
 
             <div class="card">
-                <div class="media-box video-box">
+                <div class="media-wrapper video-wrapper">
                     <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video" allowfullscreen></iframe>
-                    <!-- Watermark trên Video -->
-                    <div class="watermark" style="top: 10px; bottom: auto;">
-                        <i class="fa-solid fa-circle-check"></i> By Trần Đình Tuấn
-                    </div>
                 </div>
                 <div class="card-body">
-                    <h3 class="card-title">Video Hướng Dẫn Kỹ Thuật</h3>
-                    <div class="card-meta">
-                        <span><i class="fa-regular fa-user"></i> Trần Đình Tuấn</span>
+                    <h3 class="card-title">Hướng Dẫn Sáng Tạo Nội Dung</h3>
+                    <p class="card-desc">Video tư liệu chia sẻ quy trình làm việc và lên ý tưởng cho các bài viết cá nhân.</p>
+                    
+                    <div class="card-footer-source">
+                        <div class="author-info">
+                            <div class="author-avatar"><i class="fa-brands fa-youtube"></i></div>
+                            <span>Kênh: <strong>Creative Studio</strong></span>
+                        </div>
+                        <a href="https://youtube.com" target="_blank" class="source-link">Xem gốc <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                     </div>
-                    <p class="card-desc">Video chia sẻ kinh nghiệm tự học làm phần mềm và giao diện web.</p>
                 </div>
             </div>
 
@@ -291,9 +422,15 @@
 
     </div>
 
-    <!-- CHÂN TRANG - BẢN QUYỀN -->
+    <!-- FOOTER CHẮC CHẮN BẢN QUYỀN -->
     <footer>
-        <p>© 2026 <strong>Trần Đình Tuấn</strong>. Tất cả quyền sở hữu nội dung và hình ảnh được bảo hộ.</p>
+        <div class="footer-brand">ArtPin</div>
+        <p class="footer-copyright">
+            © 2026 <strong>ArtPin Platform</strong>. Tất cả nội dung được bảo lưu theo quyền tác giả.
+        </p>
+        <div class="founder-tag">
+            <i class="fa-solid fa-code"></i> Developed & Designed by <strong>Trần Đình Tuấn</strong>
+        </div>
     </footer>
 
 </body>
