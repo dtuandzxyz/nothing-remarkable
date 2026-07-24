@@ -1,31 +1,519 @@
-<!-- BÀI ĐĂNG TRÊN TRANG CHỦ -->
-<div class="card">
-    <div class="media-wrapper">
-        <!-- Bấm vào ảnh sẽ dẫn tới trang post-1.html -->
-        <a href="post-1.html">
-            <img src="image.jpg" alt="Chân dung công sở">
-        </a>
-    </div>
-    <div class="card-body">
-        <div class="card-header-flex">
-            <!-- Bấm vào tiêu đề cũng dẫn tới trang post-1.html -->
-            <h3 class="card-title">
-                <a href="post-1.html" style="color: inherit; text-decoration: none;">Chân Dung Công Sở Professional</a>
-            </h3>
-            <button class="btn-copy-link" onclick="copyPostLink('post-1.html', this)">
-                <i class="fa-regular fa-copy"></i> Copy Link
-            </button>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArtPin - Platform sáng tạo độc lập</title>
+    
+    <meta name="author" content="Trần Đình Tuấn">
+    <meta name="copyright" content="Trần Đình Tuấn">
+    
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --bg-dark: #090d16;
+            --card-bg: rgba(22, 30, 46, 0.75);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-glow: rgba(99, 102, 241, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 20% 15%, var(--accent-glow) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(236, 72, 153, 0.1) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        /* HEADER */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(9, 13, 22, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo i {
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .creator-badge {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .creator-badge strong { color: #fff; }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        /* HERO BANNER */
+        .hero {
+            text-align: center;
+            padding: 60px 20px 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: linear-gradient(180deg, #ffffff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        /* MAIN CONTAINER */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* GRID SYSTEM */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(99, 102, 241, 0.4);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .media-wrapper {
+            position: relative;
+            width: 100%;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .media-wrapper img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            object-position: top center;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover .media-wrapper img { transform: scale(1.04); }
+
+        .card-body {
+            padding: 22px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            margin-bottom: 20px;
+            flex: 1;
+        }
+
+        .card-footer-source {
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.85rem;
+        }
+
+        .author-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #e2e8f0;
+            font-weight: 600;
+        }
+
+        .author-avatar {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: #fff;
+        }
+
+        .btn-view-link {
+            background: rgba(99, 102, 241, 0.15);
+            color: #818cf8;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.82rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: 0.2s;
+        }
+
+        .card:hover .btn-view-link {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        /* POPUP MODAL COPY LINK */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-box {
+            background: #111827;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 18px; right: 20px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .modal-close:hover { color: #fff; }
+
+        .modal-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .link-input-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            background: #090d16;
+            padding: 6px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .link-input-group input {
+            background: transparent;
+            border: none;
+            color: #60a5fa;
+            width: 100%;
+            padding: 10px 12px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .btn-copy-modal {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: 0.2s;
+        }
+
+        .btn-copy-modal:hover { background: var(--primary-hover); }
+
+        /* FOOTER */
+        footer {
+            background: #05070c;
+            border-top: 1px solid var(--border-color);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .footer-brand {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .founder-tag {
+            display: inline-block;
+            margin-top: 15px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(236, 72, 153, 0.2));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: #cbd5e1;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <div class="brand-container">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-shapes"></i> ArtPin
+            </a>
+            <div class="creator-badge">Created by <strong>Trần Đình Tuấn</strong></div>
         </div>
-        
-        <p class="card-desc">Tóm tắt ngắn gọn bài viết...</p>
-        
-        <div class="card-footer-source">
-            <div class="author-info">
-                <div class="author-avatar" style="background: #ec4899;"><i class="fa-solid fa-crown"></i></div>
-                <span>Tác giả: <strong>Trần Đình Tuấn</strong></span>
+
+        <ul class="nav-links">
+            <li><a href="#tac-pham">Tranh & Bức Ảnh</a></li>
+        </ul>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <h1>Khám Phá Sáng Tạo Trên ArtPin</h1>
+        <p>Nền tảng lưu trữ, tổng hợp bài viết và các tác phẩm nghệ thuật độc đáo.</p>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+
+        <div class="section-header" id="tac-pham">
+            <h2 class="section-title"><i class="fa-solid fa-palette" style="color: #6366f1;"></i> Bộ Sưu Tầm Tranh & Bức Ảnh</h2>
+        </div>
+
+        <div class="grid">
+
+            <!-- BÀI ĐĂNG 1: BẤM VÀO ĐÂU CŨNG BẬT POPUP LINK -->
+            <div class="card" onclick="openLinkModal('Chân Dung Công Sở Professional', 'image.jpg')">
+                <div class="media-wrapper">
+                    <img src="image.jpg" alt="Chân dung công sở">
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Chân Dung Công Sở Professional</h3>
+                    <p class="card-desc">Ảnh chụp chân dung phong cách làm việc chuyên nghiệp, thanh lịch với phông nền xanh tiêu chuẩn.</p>
+                    
+                    <div class="card-footer-source">
+                        <div class="author-info">
+                            <div class="author-avatar" style="background: #ec4899;"><i class="fa-solid fa-crown"></i></div>
+                            <span>Tác giả: <strong>Trần Đình Tuấn</strong></span>
+                        </div>
+                        <span class="btn-view-link">
+                            <i class="fa-solid fa-link"></i> Lấy Link
+                        </span>
+                    </div>
+                </div>
             </div>
-            <!-- Bấm vào đây để đi tới trang đọc chi tiết -->
-            <a href="post-1.html" class="source-link">Đọc chi tiết <i class="fa-solid fa-arrow-right"></i></a>
+
+            <!-- BÀI ĐĂNG 2 -->
+            <div class="card" onclick="openLinkModal('Vũ Điệu Màu Sắc Trừu Tượng', 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675')">
+                <div class="media-wrapper">
+                    <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=600&q=80" alt="Tác phẩm nghệ thuật">
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Vũ Điệu Màu Sắc Trừu Tượng</h3>
+                    <p class="card-desc">Bức tranh nghệ thuật sơn dầu kết hợp kỹ thuật phối màu đương đại cực kỳ ấn tượng.</p>
+                    
+                    <div class="card-footer-source">
+                        <div class="author-info">
+                            <div class="author-avatar"><i class="fa-solid fa-user"></i></div>
+                            <span>Tác giả: <strong>Elena Rostova</strong></span>
+                        </div>
+                        <span class="btn-view-link">
+                            <i class="fa-solid fa-link"></i> Lấy Link
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- BẢNG POPUP HIỂN THỊ LINK ĐỂ COPY -->
+    <div class="modal-overlay" id="linkModal" onclick="closeLinkModal(event)">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeLinkModal()"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="modal-title" id="modalPostTitle">Liên kết bài viết</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem;">Đường link trực tiếp dẫn tới bài viết và hình ảnh của bạn:</p>
+
+            <div class="link-input-group">
+                <input type="text" id="modalLinkInput" readonly>
+                <button class="btn-copy-modal" id="btnCopyModal" onclick="copyModalLink()">
+                    <i class="fa-regular fa-copy"></i> Copy Link
+                </button>
+            </div>
         </div>
     </div>
-</div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-brand">ArtPin</div>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+            © 2026 <strong>ArtPin Platform</strong>. Tất cả nội dung được bảo lưu theo quyền tác giả.
+        </p>
+        <div class="founder-tag">
+            <i class="fa-solid fa-code"></i> Developed & Designed by <strong>Trần Đình Tuấn</strong>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT BẬT/TẮT POPUP VÀ COPY LINK -->
+    <script>
+        function openLinkModal(title, imageSrc) {
+            document.getElementById('modalPostTitle').innerText = title;
+            
+            // Lấy URL đầy đủ của file ảnh trên domain của bạn
+            let fullUrl = window.location.origin + '/' + imageSrc;
+            if (imageSrc.startsWith('http')) {
+                fullUrl = imageSrc;
+            }
+
+            document.getElementById('modalLinkInput').value = fullUrl;
+            document.getElementById('linkModal').classList.add('active');
+        }
+
+        function closeLinkModal(e) {
+            document.getElementById('linkModal').classList.remove('active');
+        }
+
+        function copyModalLink() {
+            const input = document.getElementById('modalLinkInput');
+            const btn = document.getElementById('btnCopyModal');
+
+            navigator.clipboard.writeText(input.value).then(() => {
+                btn.style.background = '#22c55e';
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> Đã chép!';
+                
+                setTimeout(() => {
+                    btn.style.background = 'var(--primary)';
+                    btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy Link';
+                }, 2000);
+            });
+        }
+    </script>
+
+</body>
+</html>
