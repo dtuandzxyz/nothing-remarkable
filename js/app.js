@@ -42,10 +42,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       allArtworks = [...customItems, ...INITIAL_ARTWORKS];
       updateStats();
       renderGallery();
+      // Check if URL contains direct link to artwork
+      handleHashRoute();
     } catch (err) {
       console.error("Failed to load items:", err);
       allArtworks = [...INITIAL_ARTWORKS];
       renderGallery();
+      handleHashRoute();
     }
   }
 
@@ -111,7 +114,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         </div>
       `;
 
-      card.addEventListener("click", () => openDetailModal(item));
+      card.addEventListener("click", () => openDetailModal(item, true));
       galleryGrid.appendChild(card);
     });
   }
@@ -133,8 +136,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // 4. Detail View Modal Logic
-  function openDetailModal(item) {
+  // 4. Detail View Modal & Deep Linking Logic
+  function openDetailModal(item, updateHash = true) {
     activeArtwork = item;
     const mediaContainer = document.getElementById("detailMediaContainer");
     const titleEl = document.getElementById("detailTitle");
@@ -187,7 +190,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       deleteBtn.onclick = async () => {
         if (confirm("Bạn có chắc chắn muốn xóa tác phẩm này khỏi bộ sưu tập?")) {
           await window.hakaiStorage.deleteArtwork(item.id);
-          closeDetailModalFunc();
+          closeDetailModalFunc(true);
           showToast("Đã xóa tác phẩm thành công!");
           loadData();
         }
@@ -196,18 +199,45 @@ document.addEventListener("DOMContentLoaded", async () => {
       deleteBtn.style.display = "none";
     }
 
+    // Update URL hash to unique artwork link
+    if (updateHash) {
+      window.history.pushState(null, "", `#artwork-${item.id}`);
+    }
+
     detailModal.classList.add("active");
   }
 
-  function closeDetailModalFunc() {
+  function closeDetailModalFunc(updateHash = true) {
     detailModal.classList.remove("active");
     const mediaContainer = document.getElementById("detailMediaContainer");
     mediaContainer.innerHTML = ""; // Stop video playback
+
+    if (updateHash && window.location.hash.startsWith("#artwork-")) {
+      window.history.pushState(null, "", window.location.pathname + window.location.search);
+    }
   }
 
-  if (closeDetailBtn) closeDetailBtn.addEventListener("click", closeDetailModalFunc);
+  // Handle URL hash changes (Direct Link & Browser Back/Forward buttons)
+  function handleHashRoute() {
+    const hash = window.location.hash;
+    if (hash && hash.startsWith("#artwork-")) {
+      const artworkId = hash.replace("#artwork-", "");
+      const target = allArtworks.find(a => a.id === artworkId);
+      if (target) {
+        openDetailModal(target, false);
+      }
+    } else {
+      if (detailModal.classList.contains("active")) {
+        closeDetailModalFunc(false);
+      }
+    }
+  }
+
+  window.addEventListener("hashchange", handleHashRoute);
+
+  if (closeDetailBtn) closeDetailBtn.addEventListener("click", () => closeDetailModalFunc(true));
   detailModal.addEventListener("click", (e) => {
-    if (e.target === detailModal) closeDetailModalFunc();
+    if (e.target === detailModal) closeDetailModalFunc(true);
   });
 
   // 5. Upload Modal Logic
@@ -314,7 +344,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       await window.hakaiStorage.saveArtwork(newArtwork);
       closeUploadModalFunc();
       showToast("Đã tải lên tác phẩm thành công!");
-      loadData();
+      await loadData();
+      // Open newly uploaded artwork with its own URL link!
+      openDetailModal(newArtwork, true);
     };
 
     reader.readAsDataURL(selectedUploadFile);
@@ -332,13 +364,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     }, 4000);
   }
 
-  // 6. Share Link Action
+  // 6. Share Direct Link Action
   const btnShare = document.getElementById("btnShareArtwork");
   if (btnShare) {
     btnShare.addEventListener("click", () => {
-      if (navigator.clipboard && activeArtwork) {
-        navigator.clipboard.writeText(window.location.href);
-        showToast("Đã sao chép liên kết tác phẩm!");
+      if (activeArtwork) {
+        const directUrl = window.location.origin + window.location.pathname + window.location.search + `#artwork-${activeArtwork.id}`;
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(directUrl);
+          showToast("Đã sao chép đường link riêng của tác phẩm!");
+        } else {
+          prompt("Đường link trực tiếp của tác phẩm:", directUrl);
+        }
       }
     });
   }
