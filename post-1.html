@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chân Dung Công Sở Professional - ArtPin</title>
+    <title>Professional Corporate Portrait - ArtPin</title>
     
     <meta name="author" content="Trần Đình Tuấn">
     
@@ -77,7 +77,7 @@
 
         .btn-back:hover { color: #fff; }
 
-        /* CONTAINER BỐ CỤC CHÍNH (2 CỘT GIỐNG ART VIETNAM GALLERY) */
+        /* MAIN 2-COLUMN CONTAINER */
         .detail-container {
             max-width: 1200px;
             margin: 40px auto;
@@ -95,7 +95,7 @@
             }
         }
 
-        /* CỘT BÊN TRÁI: HIỂN THỊ ẢNH TÁC PHẨM LỚN */
+        /* LEFT COLUMN: LARGE IMAGE DISPLAY */
         .artwork-image-wrapper {
             background: rgba(0, 0, 0, 0.4);
             border: 1px solid var(--border-color);
@@ -112,7 +112,7 @@
             display: block;
         }
 
-        /* CỘT BÊN PHẢI: THÔNG TIN CHI TIẾT TÁC PHẨM */
+        /* RIGHT COLUMN: ARTWORK DETAILS */
         .artwork-info {
             display: flex;
             flex-direction: column;
@@ -159,7 +159,7 @@
             line-height: 1.7;
         }
 
-        /* NÚT COPY LINK BÀI VIẾT */
+        /* COPY BUTTON */
         .action-box {
             display: flex;
             gap: 15px;
@@ -183,7 +183,7 @@
 
         .btn-copy:hover { background: var(--primary-hover); }
 
-        /* PHẦN TÁC PHẨM LIÊN QUAN (RELATED ARTWORKS) */
+        /* RELATED ARTWORKS SECTION */
         .related-section {
             max-width: 1200px;
             margin: 60px auto 80px;
@@ -249,60 +249,60 @@
             <i class="fa-solid fa-shapes" style="color: #6366f1;"></i> ArtPin
         </a>
         <a href="index.html" class="btn-back">
-            <i class="fa-solid fa-chevron-left"></i> QUAY LẠI (BACK)
+            <i class="fa-solid fa-chevron-left"></i> BACK TO HOME
         </a>
     </header>
 
-    <!-- CHI TIẾT BÀI VIẾT BỐ CỤC 2 CỘT -->
+    <!-- DETAILED ARTWORK 2-COLUMN DISPLAY -->
     <main class="detail-container">
 
-        <!-- CỘT 1: ẢNH BÀI VIẾT -->
+        <!-- COLUMN 1: ARTWORK IMAGE -->
         <div class="artwork-image-wrapper">
-            <img src="image.jpg" alt="Chân Dung Công Sở Professional">
+            <img src="image.jpg" alt="Professional Corporate Portrait">
         </div>
 
-        <!-- CỘT 2: THÔNG TIN CHI TIẾT -->
+        <!-- COLUMN 2: ARTWORK DETAILS -->
         <div class="artwork-info">
-            <h1 class="artwork-title">Chân Dung Công Sở Professional</h1>
+            <h1 class="artwork-title">Professional Corporate Portrait</h1>
             
             <div class="artwork-artist">
                 <i class="fa-solid fa-user-nib"></i> Trần Đình Tuấn
             </div>
 
             <div class="specs-list">
-                <div class="specs-item"><strong>Thể loại:</strong> Ảnh Chân Dung / Nhiếp ảnh Công sở</div>
-                <div class="specs-item"><strong>Năm sáng tác:</strong> 2026</div>
-                <div class="specs-item"><strong>Độ phân giải:</strong> High Definition (HD)</div>
-                <div class="specs-item"><strong>Địa điểm / Nguồn:</strong> ArtPin Digital Studio, Vietnam</div>
+                <div class="specs-item"><strong>Category:</strong> Portrait Photography / Corporate</div>
+                <div class="specs-item"><strong>Year:</strong> 2026</div>
+                <div class="specs-item"><strong>Resolution:</strong> High Definition (HD)</div>
+                <div class="specs-item"><strong>Location / Origin:</strong> ArtPin Digital Studio, Vietnam</div>
             </div>
 
             <div class="artwork-description">
-                <p>Tác phẩm chân dung mang phong cách hiện đại, thanh lịch với tông màu phông nền tiêu chuẩn. Phù hợp sử dụng cho hồ sơ doanh nghiệp, tài liệu cá nhân chuyên nghiệp.</p>
+                <p>A modern, elegant portrait featuring a clean, standard backdrop. Perfectly suited for executive corporate profiles and professional personal branding.</p>
             </div>
 
-            <!-- NÚT SAO CHÉP LINK BÀI VIẾT NÀY -->
+            <!-- COPY LINK BUTTON -->
             <div class="action-box">
                 <button class="btn-copy" id="btnCopyPage" onclick="copyCurrentUrl()">
-                    <i class="fa-regular fa-copy"></i> Sao chép Link Bài Viết
+                    <i class="fa-regular fa-copy"></i> Copy Post Link
                 </button>
             </div>
         </div>
 
     </main>
 
-    <!-- BÀI VIẾT / TÁC PHẨM LIÊN QUAN (RELATED ARTWORKS) -->
+    <!-- RELATED ARTWORKS SECTION -->
     <section class="related-section">
-        <h3 class="related-title">Tác phẩm liên quan (Related Artworks)</h3>
+        <h3 class="related-title">Related Artworks</h3>
         <div class="related-grid">
             
             <a href="#" class="related-card">
                 <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=400&q=80" alt="Related 1">
-                <h4>Vũ Điệu Màu Sắc Trừu Tượng</h4>
+                <h4>Abstract Color Dance</h4>
             </a>
 
             <a href="#" class="related-card">
                 <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=400&q=80" alt="Related 2">
-                <h4>Nghệ Thuật Sơn Dầu Đương Đại</h4>
+                <h4>Contemporary Oil Artwork</h4>
             </a>
 
         </div>
@@ -313,7 +313,7 @@
         © 2026 <strong>ArtPin Platform</strong>. Developed by <strong>Trần Đình Tuấn</strong>
     </footer>
 
-    <!-- SCRIPT COPY LINK TRANG XIN XÒ -->
+    <!-- COPY LINK SCRIPT -->
     <script>
         function copyCurrentUrl() {
             const currentUrl = window.location.href;
@@ -321,11 +321,11 @@
 
             navigator.clipboard.writeText(currentUrl).then(() => {
                 btn.style.background = '#22c55e';
-                btn.innerHTML = '<i class="fa-solid fa-check"></i> Đã chép Link!';
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> Link Copied!';
 
                 setTimeout(() => {
                     btn.style.background = 'var(--primary)';
-                    btn.innerHTML = '<i class="fa-regular fa-copy"></i> Sao chép Link Bài Viết';
+                    btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy Post Link';
                 }, 2000);
             });
         }
