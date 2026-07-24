@@ -3,130 +3,297 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Thông tin bản quyền & SEO -->
-    <title>Trần Đình Tuấn - Personal Blog</title>
+    <title>Trần Đình Tuấn - Personal Portfolio & Blog</title>
+    <!-- SEO & Author -->
     <meta name="author" content="Trần Đình Tuấn">
     <meta name="copyright" content="Trần Đình Tuấn">
-    <meta name="description" content="Trang web chia sẻ bài viết và video cá nhân của Trần Đình Tuấn">
+    
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* CSS căn bản giúp trang web gọn gàng, hiện đại */
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
+        :root {
+            --primary-color: #2563eb;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-border: #334155;
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
         }
 
-        header {
-            background: #1a252f;
-            color: #fff;
-            padding: 20px 0;
-            text-align: center;
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 1.8rem;
+        /* Navigation Bar */
+        navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 8%;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--accent-border);
         }
 
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-main);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i { color: var(--primary-color); }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--primary-color); }
+
+        /* Container & Grid Layout */
         .container {
-            max-width: 800px;
-            margin: 20px auto;
+            max-width: 1100px;
+            margin: 40px auto;
             padding: 0 20px;
         }
 
-        .card {
-            background: #fff;
-            padding: 25px;
+        .section-title {
+            font-size: 1.8rem;
             margin-bottom: 25px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid var(--primary-color);
+            padding-left: 12px;
         }
 
-        .card h2 {
-            margin-top: 0;
-            color: #2c3e50;
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
         }
 
-        .date {
-            font-size: 0.85rem;
-            color: #7f8c8d;
-            margin-bottom: 15px;
-        }
-
-        /* Tối ưu tỷ lệ khung hình video YouTube (16:9) */
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* Tỷ lệ 16:9 */
-            height: 0;
+        /* Card Component */
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
             overflow: hidden;
-            border-radius: 6px;
-            margin-top: 15px;
+            border: 1px solid var(--accent-border);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
 
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* MEDIA CONTAINER & WATERMARK (Tự đóng dấu chủ sở hữu) */
+        .media-box {
+            position: relative;
             width: 100%;
-            height: 100%;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .media-box img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Đóng dấu watermark người đăng trên ảnh/video */
+        .watermark {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(15, 23, 42, 0.85);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(4px);
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .watermark i {
+            color: #22c55e; /* Icon tích xanh chứng nhận */
+        }
+
+        /* Video Responsive Box */
+        .video-box {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+
+        .video-box iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             border: 0;
         }
 
+        /* Card Content */
+        .card-body {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .card-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .card-desc {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            flex: 1;
+        }
+
+        /* Footer */
         footer {
             text-align: center;
-            padding: 20px 0;
-            background: #e9ecef;
-            color: #6c757d;
+            padding: 30px;
+            background: #090d16;
+            border-top: 1px solid var(--accent-border);
+            color: var(--text-muted);
             font-size: 0.9rem;
-            margin-top: 40px;
         }
+
+        footer strong { color: var(--text-main); }
     </style>
 </head>
 <body>
 
-    <!-- Thanh Tiêu Đề -->
-    <header>
-        <h1>Trần Đình Tuấn Blog</h1>
-        <p>Góc chia sẻ bài viết & Video cá nhân</p>
-    </header>
+    <!-- Thanh Điều Hướng Header -->
+    <navbar>
+        <a href="#" class="logo">
+            <i class="fa-solid fa-shield-halved"></i> Trần Đình Tuấn
+        </a>
+        <ul class="nav-links">
+            <li><a href="#bai-viet">Bài viết</a></li>
+            <li><a href="#tranh-anh">Tranh / Ảnh</a></li>
+            <li><a href="#video">Video</a></li>
+        </ul>
+    </navbar>
 
-    <!-- Nội dung chính -->
     <div class="container">
 
-        <!-- Bài Viết Mẫu -->
-        <article class="card">
-            <h2>Bài viết đầu tiên: Hành trình tự làm Website</h2>
-            <div class="date">Đăng ngày: 24/07/2026 • Tác giả: <strong>Trần Đình Tuấn</strong></div>
-            <p>
-                Chào mừng bạn đến với trang web cá nhân của tôi! Đây là nơi tôi lưu trữ những bài viết, góc nhìn và các video hướng dẫn/chia sẻ. Việc tự tay dựng lên một trang web trên GitHub Pages giúp tôi hiểu rõ hơn về cấu trúc web và quản lý mã nguồn.
-            </p>
-        </article>
-
-        <!-- Video Mẫu Nhúng Từ YouTube -->
-        <article class="card">
-            <h2>Video nổi bật</h2>
-            <p>Dưới đây là video mẫu được nhúng trực tiếp từ YouTube mà không tốn dung lượng lưu trữ trên GitHub:</p>
+        <!-- MỤC 1: TRANH / BỨC ẢNH CÓ ĐÓNG DẤU TÊN -->
+        <h2 class="section-title" id="tranh-anh">Bộ Sưu Tầm Tranh & Ảnh</h2>
+        <div class="grid">
             
-            <div class="video-container">
-                <!-- Thay ID video 'dQw4w9WgXcQ' bằng ID video YouTube của bạn -->
-                <iframe 
-                    src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                    title="YouTube video player" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-                </iframe>
+            <!-- Ảnh 1 -->
+            <div class="card">
+                <div class="media-box">
+                    <!-- Thay link ảnh của bạn vào src bên dưới -->
+                    <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=600&q=80" alt="Bức tranh nghệ thuật">
+                    <!-- Nhãn đóng dấu bản quyền -->
+                    <div class="watermark">
+                        <i class="fa-solid fa-circle-check"></i> By Trần Đình Tuấn
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Tác phẩm Tranh Số 01</h3>
+                    <div class="card-meta">
+                        <span><i class="fa-regular fa-calendar"></i> 24/07/2026</span>
+                    </div>
+                    <p class="card-desc">Bức tranh thiết kế đồ họa phong cách hiện đại được sáng tác và đăng tải bởi Trần Đình Tuấn.</p>
+                </div>
             </div>
-        </article>
+
+            <!-- Ảnh 2 -->
+            <div class="card">
+                <div class="media-box">
+                    <img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=600&q=80" alt="Bức tranh 2">
+                    <div class="watermark">
+                        <i class="fa-solid fa-circle-check"></i> By Trần Đình Tuấn
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Ý tưởng Phối màu Nghệ thuật</h3>
+                    <div class="card-meta">
+                        <span><i class="fa-regular fa-calendar"></i> 22/07/2026</span>
+                    </div>
+                    <p class="card-desc">Một góc nhìn sáng tạo về màu sắc và ánh sáng trong thiết kế.</p>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- MỤC 2: VIDEO CÓ ĐÓNG DẤU TÊN -->
+        <h2 class="section-title" id="video">Video Chia Sẻ</h2>
+        <div class="grid">
+
+            <div class="card">
+                <div class="media-box video-box">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video" allowfullscreen></iframe>
+                    <!-- Watermark trên Video -->
+                    <div class="watermark" style="top: 10px; bottom: auto;">
+                        <i class="fa-solid fa-circle-check"></i> By Trần Đình Tuấn
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Video Hướng Dẫn Kỹ Thuật</h3>
+                    <div class="card-meta">
+                        <span><i class="fa-regular fa-user"></i> Trần Đình Tuấn</span>
+                    </div>
+                    <p class="card-desc">Video chia sẻ kinh nghiệm tự học làm phần mềm và giao diện web.</p>
+                </div>
+            </div>
+
+        </div>
 
     </div>
 
-    <!-- Chân Trang - Xác Nhận Bản Quyền -->
+    <!-- CHÂN TRANG - BẢN QUYỀN -->
     <footer>
-        <p>&copy; 2026 <strong>Trần Đình Tuấn</strong>. All rights reserved.</p>
+        <p>© 2026 <strong>Trần Đình Tuấn</strong>. Tất cả quyền sở hữu nội dung và hình ảnh được bảo hộ.</p>
     </footer>
 
 </body>
